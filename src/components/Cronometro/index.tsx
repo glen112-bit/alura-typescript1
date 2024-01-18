@@ -15,6 +15,16 @@ const Cronometro = ({seleccionado}: Props) => {
     setTempo(tempoParaSegundos(String(seleccionado?.tempo)))
     }
   },[seleccionado])
+  const regresiva = (contador:number = 0) => {
+    setTimeout(() => {
+      if(contador > 0){
+        setTempo(contador - 1)
+        return regresiva(contador -1)
+      }
+      alert('tiempo finalizado')
+    }, 1000)
+
+  }
   // if(seleccionado?.tempo){
     // setTempo(tempoParaSegundos(seleccionado.tempo))
   // }
@@ -26,7 +36,7 @@ const Cronometro = ({seleccionado}: Props) => {
 
         <Relogio tempo={tempo}/>
       </div>
-      <Botao texto="Comenzar"/>
+      <Botao onClick={()=>{regresiva(tempo)}} texto="Comenzar"/>
     </div>
   )
 }
