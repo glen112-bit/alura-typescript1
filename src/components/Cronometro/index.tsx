@@ -6,9 +6,10 @@ import {ITarefa} from "../../types/tarefa";
 import {useEffect, useState} from "react";
 
 interface Props{
-  seleccionado:ITarefa | undefined
+  seleccionado:ITarefa | undefined,
+    finalizarTarea: () => void
 }
-const Cronometro = ({seleccionado}: Props) => {
+const Cronometro = ({seleccionado, finalizarTarea }: Props) => {
   const [tempo, setTempo] = useState<number>();
   useEffect(() => {
     if(seleccionado?.tempo){
@@ -21,7 +22,7 @@ const Cronometro = ({seleccionado}: Props) => {
         setTempo(contador - 1)
         return regresiva(contador -1)
       }
-      alert('tiempo finalizado')
+      finalizarTarea()
     }, 1000)
 
   }

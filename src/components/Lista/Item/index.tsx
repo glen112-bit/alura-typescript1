@@ -5,9 +5,10 @@ interface Props extends ITarefa {
   seleccionTarea: (tarefaSeleccionada: ITarefa) => void
 }
 const Item = ({tarefa, tempo, seleccionado, completado, id, seleccionTarea }: Props) => {
-  // console.log('item actual: ',{tarefa, tempo, seleccionado, completado, id, seleccionTarea })
   return(
-    <li className={`${style.item} ${seleccionado ? style.itemSelecionado : ''}`} onClick={() => seleccionTarea(
+    <li className={`${style.item} ${seleccionado ? style.itemSelecionado : ''} 
+      ${completado ? style.itemCompletado : ''}`} 
+       onClick={() => !completado && seleccionTarea(
         {
           tarefa,
           tempo, 
@@ -17,7 +18,12 @@ const Item = ({tarefa, tempo, seleccionado, completado, id, seleccionTarea }: Pr
         }
       )
     }>
-      <h3>{tarefa}</h3><span>{tempo}</span></li>
+      <h3>{tarefa}</h3>
+      <span>{tempo}</span>
+      {completado && <span className={style.concluido}
+        aria-label='tarrea Completada'
+      ></span> }
+    </li>
   )
 }
 export default Item
